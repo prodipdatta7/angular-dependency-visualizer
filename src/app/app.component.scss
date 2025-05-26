@@ -1,0 +1,108 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background-color: #3f51b5;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.app-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.app-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.help-btn {
+    padding: 6px 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.help-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.app-content.with-help .main-content {
+    width: 75%;
+}
+
+.main-content {
+    flex: 1;
+    width: 100%;
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+.uploader-section {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visualization-section {
+    display: flex;
+    height: 100%;
+}
+
+.graph-area {
+    flex: 1;
+    overflow: hidden;
+}
+
+.details-area {
+    width: 350px;
+    overflow: hidden;
+}
+
+.help-panel {
+    width: 25%;
+    background-color: #f8f9fa;
+    border-left: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.help-content h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: #3f51b5;
+}
+
+.help-content ol,
+.help-content ul {
+    padding-left: 20px;
+}
+
+.help-content li {
+    margin-bottom: 10px;
+}
+
+.help-content ul li {
+    margin-bottom: 5px;
+}

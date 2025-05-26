@@ -1,0 +1,75 @@
+<div class="app-container">
+  <header class="app-header">
+    <div class="app-title">
+      <h1>Angular Dependency Visualizer</h1>
+    </div>
+    <div class="app-actions">
+      <button class="help-btn" (click)="showHelp = !showHelp">
+        @if(!showHelp) { <span>Help</span> }
+        @if(showHelp) {<span >Close Help</span> }
+      </button>
+    </div>
+  </header>
+
+  <div class="app-content" [class.with-help]="showHelp">
+    <main class="main-content">
+      @if (!graphData) {
+        <div class="uploader-section">
+          <app-project-uploader (projectAnalyzed)="onProjectAnalyzed($event)"></app-project-uploader>
+        </div>
+      }
+
+      @if (graphData) {
+        <div class="visualization-section">
+          <div class="graph-area">
+            <app-graph-viewer [graphData]="graphData" (nodeSelected)="onNodeSelected($event)">
+            </app-graph-viewer>
+          </div>
+
+          <div class="details-area">
+            <app-dependency-details [component]="selectedComponent" [allComponents]="graphData.components"
+              [dependencies]="componentDependencies" [dependents]="componentDependents">
+            </app-dependency-details>
+          </div>
+        </div>
+      }
+    </main>
+
+    @if (showHelp) {
+      <aside class="help-panel">
+        <div class="help-content">
+          <h2>How to Use</h2>
+          <ol>
+            <li>
+              <strong>Upload your project:</strong>
+              Add a zip file containing your Angular project. The analyzer will extract component dependencies.
+            </li>
+            <li>
+              <strong>Visualize dependencies:</strong>
+              Once uploaded, the component graph will display showing relationships between components.
+            </li>
+            <li>
+              <strong>Interact with the graph:</strong>
+              <ul>
+                <li>Click on nodes to select components and view details</li>
+                <li>Drag nodes to reposition them</li>
+                <li>Use controls to zoom in/out or switch layouts</li>
+              </ul>
+            </li>
+            <li>
+              <strong>View component details:</strong>
+              The side panel shows detailed information about the selected component.
+            </li>
+          </ol>
+
+          <h2>Tips</h2>
+          <ul>
+            <li>For large projects, the "Tree" layout may provide better clarity</li>
+            <li>Double-click on the graph background to reset the view</li>
+            <li>Components are color-coded based on their type</li>
+          </ul>
+        </div>
+      </aside>
+    }
+  </div>
+</div>

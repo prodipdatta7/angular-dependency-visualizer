@@ -1,0 +1,106 @@
+@if (component) {
+    <div class="details-container">
+        <div class="header">
+            <h2>{{ component.name }}</h2>
+            <span class="file-path">{{ component.filePath }}</span>
+        </div>
+
+    <div class="tabs">
+        @for (tab of tabs; track $index) {
+            <button [class.active]="activeTab === tab.id" (click)="activeTab = tab.id">
+                {{ tab.name }}
+            </button>
+        }
+    </div>
+
+    <div class="tab-content">
+        <!-- Overview Tab -->
+         @if (activeTab === 'overview') {
+            <div class="overview-tab">
+                <div class="info-section">
+                    <h3>Component Info</h3>
+                    <div class="info-item">
+                        <span class="label">ID:</span>
+                        <span>{{ component.itemId }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Path:</span>
+                        <span>{{ component.filePath }}</span>
+                    </div>
+                    @if (component.metadata) {
+                        <div class="info-item">
+                            <span class="label">Module:</span>
+                            <span>{{ component.metadata['module'] || 'N/A' }}</span>
+                        </div>
+                    }
+                    <div class="info-item">
+                        <span class="label">Selector:</span>
+                        <span>{{ component.metadata?.['selector'] || 'N/A' }}</span>
+                    </div>
+                </div>
+                
+                @if (dependencies.length > 0) {
+                    <div class="related-section">
+                        <h3>Dependencies</h3>
+                        <ul class="related-list">
+                            @for (dep of dependencies; track $index) {
+                                <li (click)="selectComponent(dep)">
+                                    {{ dep.name }}
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                @if (dependents.length > 0) {
+                    <div class="related-section">
+                        <h3>Dependents</h3>
+                        <ul class="related-list">
+                            @for (dep of dependents; track $index) {
+                                <li (click)="selectComponent(dep)">
+                                    {{ dep.name }}
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Source Tab -->
+         @if (activeTab === 'source') {
+            <div class="source-tab">
+                <div class="code-container">
+                    <pre><code class="language-typescript">{{ mockSourceCode }}</code></pre>
+                </div>
+            </div>
+        }
+
+        <!-- Metadata Tab -->
+         @if (activeTab === 'metadata') {
+            <div class="metadata-tab">
+                @if (component.metadata && getMetadataEntries().length > 0) {
+                    @for (entry of getMetadataEntries(); track $index) {
+                        <div class="metadata-item">
+                            <span class="metadata-key">{{ entry.key }}:</span>
+                            <span class="metadata-value">{{ entry.value }}</span>
+                        </div>
+                    }
+                    
+                }
+                @if (!component.metadata || getMetadataEntries().length === 0) {
+                    <div class="no-data">
+                        No metadata available
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+}
+
+@if (!component) {
+    <div class="empty-state">
+    <p>Select a component from the graph to view details</p>
+</div>
+}

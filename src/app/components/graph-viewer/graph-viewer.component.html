@@ -1,0 +1,33 @@
+<div class="graph-container" #graphContainer>
+    <!-- D3 visualization will be rendered here -->
+</div>
+<div class="graph-controls">
+    <!-- Layout controls -->
+    <div class="layout-controls">
+        <span class="control-label">Layout:</span>
+        <button (click)="setLayout('force')" class="control-btn" [class.active]="currentLayout === 'force'">
+            <i class="fas fa-project-diagram"></i> Force
+        </button>
+        <button (click)="setLayout('tree')" class="control-btn" [class.active]="currentLayout === 'tree'">
+            <i class="fas fa-sitemap"></i> Tree
+        </button>
+        <button (click)="setLayout('radial')" class="control-btn" [class.active]="currentLayout === 'radial'">
+            <i class="fas fa-circle-notch"></i> Radial
+        </button>
+    </div>
+    <!-- Navigation controls -->
+    <div class="nav-controls">
+        <button (click)="zoomIn()" class="control-btn">
+            <i class="fas fa-search-plus"></i> Zoom In
+        </button>
+        <button (click)="zoomOut()" class="control-btn">
+            <i class="fas fa-search-minus"></i> Zoom Out
+        </button>
+        <button (click)="resetZoom()" class="control-btn">
+            <i class="fas fa-sync"></i> Reset
+        </button>
+        <button (click)="centerGraph()" class="control-btn">
+            <i class="fas fa-compress-arrows-alt"></i> Center
+        </button>
+    </div>
+</div>

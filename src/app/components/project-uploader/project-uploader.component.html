@@ -1,0 +1,36 @@
+<div class="uploader-container">
+    <h2>Upload Angular Project</h2>
+    <p>Upload a zip file of your Angular project to analyze component dependencies</p>
+
+    <div class="upload-area" [class.active]="isDragging" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+        (drop)="onDrop($event)">
+
+        <div class="upload-prompt">
+            <span class="upload-icon">📁</span>
+            <p>Drag and drop a project zip file here</p>
+            <p>or</p>
+            <button (click)="fileInput.click()">Select File</button>
+            <input #fileInput type="file" accept=".zip" style="display: none" (change)="onFileSelected($event)">
+        </div>
+
+        @if (selectedFile) {
+            <div class="file-info">
+                <p>Selected file: {{ selectedFile.name }}</p>
+                <button (click)="analyzeProject()">Analyze Project</button>
+            </div>
+        }
+    </div>
+
+    @if (isAnalyzing) {
+        <div class="analyzing">
+            <p>Analyzing project, please wait...</p>
+            <div class="progress-bar"></div>
+        </div>
+    }
+    @if (error) {
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+    }
+    
+</div>
