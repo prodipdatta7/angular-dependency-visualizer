@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint",
+    "format": "prettier --write \"src/**/*.{ts,html,css}\""
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.11",
+    "@angular-eslint/schematics": "^19.5.0",
     "@angular/cli": "^19.2.11",
     "@angular/compiler-cli": "^19.2.0",
     "@types/d3": "^7.4.3",
@@ -35,6 +38,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.5.3",
     "typescript": "~5.7.2"
   }
 }
